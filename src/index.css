@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .dark {
+    --background: 231 42% 4%;
+    --foreground: 220 33% 96%;
+    --card: 231 36% 6%;
+    --card-foreground: 220 33% 96%;
+    --muted: 230 28% 11%;
+    --muted-foreground: 223 16% 62%;
+    --accent: 230 28% 13%;
+    --accent-foreground: 220 33% 96%;
+    --border: 228 24% 16%;
+    --input: 228 24% 16%;
+    --primary: 38 96% 56%;
+    --primary-foreground: 231 42% 6%;
+    --secondary: 190 88% 62%;
+    --secondary-foreground: 231 42% 6%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 220 33% 96%;
+    --ring: 38 96% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    background-image:
+      radial-gradient(1000px 520px at 12% -8%, hsl(38 96% 56% / 0.07), transparent 62%),
+      radial-gradient(900px 480px at 92% 0%, hsl(190 88% 62% / 0.06), transparent 60%),
+      radial-gradient(1100px 700px at 50% 110%, hsl(264 60% 40% / 0.05), transparent 65%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: hsl(38 96% 56% / 0.28);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(231 42% 4%);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(228 24% 18%);
+    border-radius: 999px;
+    border: 2px solid hsl(231 42% 4%);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(228 24% 26%);
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-sm;
+  }
+
+  .hairline {
+    @apply border-white/[0.07];
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 32px hsl(38 96% 56% / 0.45);
+  }
+}
+
+@layer utilities {
+  .bg-grid-faint {
+    background-image:
+      linear-gradient(to right, hsl(0 0% 100% / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 100% / 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
+  }
+
+  .mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+}
