@@ -42,9 +42,10 @@ export default function ModelDetail() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
         <p className="eyebrow">404</p>
-        <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight">This model isn't in orbit</h1>
+        <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight">No model at this address</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          The model you're looking for doesn't exist in the index (yet).
+          Every model page in the index has its own slug. Right now the index is being rebuilt, so those pages
+          aren't live yet.
         </p>
         <div className="mt-8 flex justify-center gap-3">
           <Button to="/models">Back to directory</Button>

@@ -11,6 +11,8 @@ const NAV_LINKS = [
   { to: "/calculator", label: "Cost calculator" },
 ];
 
+void STATS;
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
 
@@ -46,7 +48,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <Button to="/models" size="sm" variant="outline">
-            Browse {STATS.modelCount} models
+            Browse models
           </Button>
         </div>
 
