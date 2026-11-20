@@ -247,7 +247,7 @@ export const MODELS: Model[] = [
     contextWindow: 1_048_576,
     maxOutput: 16_384,
     cutoff: "2026-05",
-    pricing: { input: 0, output: 0, note: "Community-hosted free tier via Pollinations AI." },
+    pricing: { input: 0, output: 0, note: "Community-hosted free tier via Pollinations AI; typically $0/mo on list API pricing." },
     openWeights: false,
     license: "Free / research use",
     params: "~3.5B",
