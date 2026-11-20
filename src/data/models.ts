@@ -203,6 +203,14 @@ export const PROVIDERS: Provider[] = [
     region: "United States",
     blurb: "Nemotron hybrid Mamba-Transformer models tuned for agent throughput.",
   },
+  {
+    id: "pollinations",
+    name: "Pollinations AI",
+    short: "PN",
+    color: "#F472B6",
+    region: "Global",
+    blurb: "Free, open-ended inference endpoint for community and experimental model access.",
+  },
 ];
 
 export type Modality = "text" | "image" | "audio" | "video" | "pdf";
@@ -230,7 +238,36 @@ export interface Model {
   featured?: boolean;
 }
 
-export const MODELS: Model[] = [];
+export const MODELS: Model[] = [
+  {
+    slug: "community/yoanndev90-vercel-nemotron-3-5-lightning-free",
+    name: "Nemotron 3.5 Lightning",
+    providerId: "pollinations",
+    released: "2026-11",
+    contextWindow: 1_048_576,
+    maxOutput: 16_384,
+    cutoff: "2026-05",
+    pricing: { input: 0, output: 0, note: "Community-hosted free tier via Pollinations AI." },
+    openWeights: false,
+    license: "Free / research use",
+    params: "~3.5B",
+    architecture: "MoE",
+    modalities: ["text"],
+    capabilities: ["coding", "reasoning", "long-context"],
+    benchmarks: {
+      swebench: 43.2,
+      gpqa: 61.8,
+    },
+    summary:
+      "Community-hosted free tier of Vercel’s Nemotron 3.5 Lightning, exposed through Pollinations AI for low-latency inference at no API cost.",
+    highlights: [
+      "Free inference through Pollinations AI with no API key required for the base tier.",
+      "1M-token context keeps longer code and chat sessions in a single request.",
+      "MoE layout favors speed and endpoint throughput over largest-ever parameter counts.",
+    ],
+    bestFor: ["quick prototypes", "free experimentation", "lightweight coding assistants"],
+  },
+];
 
 export function getProvider(id: string): Provider | undefined {
   return PROVIDERS.find((p) => p.id === id);
@@ -256,6 +293,6 @@ export const STATS = {
   modelCount: MODELS.length,
   providerCount: PROVIDERS.length,
   openWeightCount: MODELS.filter((m) => m.openWeights).length,
-  maxContext: 0,
-  latestRelease: "",
+  maxContext: Math.max(...MODELS.map((m) => m.contextWindow), 0),
+  latestRelease: [...MODELS.map((m) => m.released)].sort().at(-1) ?? "",
 };
