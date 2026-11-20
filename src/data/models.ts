@@ -213,6 +213,9 @@ export const PROVIDERS: Provider[] = [
   },
 ];
 
+const FREE_TIER_NOTE = "Free tier via Pollinations AI; typically $0/mo on list API pricing.";
+
+
 export type Modality = "text" | "image" | "audio" | "video" | "pdf";
 
 export interface Model {
@@ -247,7 +250,7 @@ export const MODELS: Model[] = [
     contextWindow: 1_048_576,
     maxOutput: 16_384,
     cutoff: "2026-05",
-    pricing: { input: 0, output: 0, note: "Community-hosted free tier via Pollinations AI; typically $0/mo on list API pricing." },
+    pricing: { input: 0, output: 0, note: FREE_TIER_NOTE },
     openWeights: false,
     license: "Free / research use",
     params: "~3.5B",
@@ -266,6 +269,34 @@ export const MODELS: Model[] = [
       "MoE layout favors speed and endpoint throughput over largest-ever parameter counts.",
     ],
     bestFor: ["quick prototypes", "free experimentation", "lightweight coding assistants"],
+  },
+  {
+    slug: "minimax/m3-1-flash",
+    name: "MiniMax M3.1 Flash",
+    providerId: "minimax",
+    released: "2026-11",
+    contextWindow: 262_144,
+    maxOutput: 8_192,
+    cutoff: "2026-09",
+    pricing: { input: 0.20, output: 0.80, note: "Playground/preview pricing for the flash tier." },
+    openWeights: false,
+    license: "Proprietary API",
+    params: "~8B",
+    architecture: "MoE",
+    modalities: ["text"],
+    capabilities: ["coding", "agentic", "reasoning"],
+    benchmarks: {
+      swebench: 48.5,
+      gpqa: 64.3,
+    },
+    summary:
+      "MiniMax Flash-class model for low-latency agent loops and coding helpers, with competitive benchmark numbers at a much lower price point than its frontier lineup.",
+    highlights: [
+      "Flash-tier pricing makes high-volume agent and coding usage far cheaper than frontier MiniMax models.",
+      "Strong SWE-bench and GPQA numbers for a sub-flash-class model.",
+      "Short-window MoE built for fast tool-use and multi-step agent loops.",
+    ],
+    bestFor: ["high-volume agents", "cheap coding helpers", "batch tool use"],
   },
 ];
 
