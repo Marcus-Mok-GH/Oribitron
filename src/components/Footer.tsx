@@ -13,6 +13,7 @@ export function Footer() {
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
             A map of the large language model universe: {STATS.modelCount} models from {STATS.providerCount}{" "}
             labs, with the context windows, pricing and 2026 benchmarks that actually change a decision.
+            Right now the catalog is being rebuilt — new models are on the way.
           </p>
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
             Last reviewed · {LAST_UPDATED}

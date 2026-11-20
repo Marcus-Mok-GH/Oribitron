@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, CircleDollarSign, Gauge, Radar, Unlock } from "lucide-react";
-import { BENCHMARKS, LAST_UPDATED, MODELS, STATS, featuredModels, getProvider } from "../data/models";
-import { formatPrice, formatTokens } from "../lib/utils";
+import { ArrowRight, CircleDollarSign, Gauge, Radar, Unlock } from "lucide-react";
+import { LAST_UPDATED, STATS } from "../data/models";
+import { formatTokens } from "../lib/utils";
 import { OrbitVisual } from "../components/OrbitVisual";
-import { ModelCard } from "../components/ModelCard";
 import { Button } from "../components/ui";
 
 const fadeUp = {
@@ -118,22 +116,14 @@ function Featured() {
         <div>
           <p className="eyebrow">Featured this month</p>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            The models defining mid-2026
+            Models coming soon
           </h2>
         </div>
-        <Link
-          to="/models"
-          className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          All {STATS.modelCount} models
-          <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </Link>
       </div>
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredModels().map((model) => (
-          <ModelCard key={model.slug} model={model} />
-        ))}
-      </div>
+      <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+        No models in the index yet. New ones are being added, and the listing, comparisons, and calculator will
+        light up as soon as they do.
+      </p>
     </section>
   );
 }
@@ -185,66 +175,6 @@ function Features() {
   );
 }
 
-function Leaderboard() {
-  const leaders = MODELS.filter((m) => m.benchmarks.swebench !== undefined)
-    .sort((a, b) => (b.benchmarks.swebench ?? 0) - (a.benchmarks.swebench ?? 0))
-    .slice(0, 6);
-
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="eyebrow">Coding leaderboard</p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            SWE-bench Verified, top six
-          </h2>
-        </div>
-        <p className="max-w-xs text-xs leading-relaxed text-muted-foreground/80">
-          {BENCHMARKS.swebench.description} Open-weight models are shaded. Scores are directional.
-        </p>
-      </div>
-
-      <div className="panel mt-10 divide-y divide-white/[0.06]">
-        {leaders.map((model, index) => {
-          const provider = getProvider(model.providerId);
-          const score = model.benchmarks.swebench ?? 0;
-          return (
-            <Link
-              key={model.slug}
-              to={`/models/${model.slug}`}
-              className="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-white/[0.03] sm:gap-6"
-            >
-              <span className="w-6 font-mono text-xs text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">
-                  {model.name}
-                  {model.openWeights && (
-                    <span className="ml-2 font-mono text-[10px] uppercase tracking-wider text-emerald-300/80">open</span>
-                  )}
-                </p>
-                <p className="mt-0.5 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                  <span className="size-1.5 rounded-full" style={{ backgroundColor: provider?.color }} />
-                  {provider?.name}
-                </p>
-              </div>
-              <div className="hidden h-1.5 w-40 overflow-hidden rounded-full bg-white/[0.05] sm:block md:w-64">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-primary/70 to-primary"
-                  style={{ width: `${score}%` }}
-                />
-              </div>
-              <span className="w-16 text-right font-mono text-sm tabular-nums">{score.toFixed(1)}%</span>
-              <span className="hidden w-24 text-right font-mono text-xs tabular-nums text-muted-foreground md:block">
-                {model.pricing ? `${formatPrice(model.pricing.input)}/M` : "self-host"}
-              </span>
-            </Link>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
 function CalculatorCta() {
   return (
     <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
@@ -279,7 +209,6 @@ export default function Home() {
       <StatsStrip />
       <Featured />
       <Features />
-      <Leaderboard />
       <CalculatorCta />
     </>
   );

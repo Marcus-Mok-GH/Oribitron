@@ -90,8 +90,8 @@ export default function Models() {
       <p className="eyebrow">Model directory</p>
       <h1 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">Every model worth knowing</h1>
       <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-        {MODELS.length} models from {PROVIDERS.length} labs — frontier APIs and open weights side by side. Filter by
-        lab, capability or price, then compare before you commit.
+        {MODELS.length} models from {PROVIDERS.length} labs — frontier APIs and open weights side by side.
+        Models are being added now; the directory, filters, and comparisons will light up as soon as they do.
       </p>
 
       <div className="panel mt-10 p-4">
@@ -176,9 +176,9 @@ export default function Models() {
         </div>
       ) : (
         <div className="panel mt-8 flex flex-col items-center gap-4 px-6 py-20 text-center">
-          <p className="font-display text-xl font-semibold">No models match those filters</p>
+          <p className="font-display text-xl font-semibold">No models in the index yet</p>
           <p className="max-w-sm text-sm text-muted-foreground">
-            Try widening the search — or reset and browse the full catalog.
+            New models are being added. When they arrive, you can filter and compare them here.
           </p>
           <button
             type="button"
