@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "./ui";
 import { cn } from "../lib/utils";
 import { STATS } from "../data/models";
+import { useAuth } from "../lib/auth";
 
 const NAV_LINKS = [
   { to: "/models", label: "Models" },
@@ -15,6 +16,27 @@ void STATS;
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, loading, logout } = useAuth();
+
+  const authArea = user ? (
+    <div className="flex items-center gap-2">
+      <span className="max-w-40 truncate text-sm text-muted-foreground">
+        {user.name || user.email}
+      </span>
+      <Button size="sm" variant="outline" onClick={() => void logout()}>
+        Sign out
+      </Button>
+    </div>
+  ) : (
+    <div className="flex items-center gap-2">
+      <Button to="/login" size="sm" variant="outline">
+        Sign in
+      </Button>
+      <Button to="/signup" size="sm">
+        Sign up
+      </Button>
+    </div>
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-background/80 backdrop-blur-xl">
@@ -50,6 +72,7 @@ export function Navbar() {
           <Button to="/models" size="sm" variant="outline">
             Browse models
           </Button>
+          {!loading && authArea}
         </div>
 
         <button
@@ -81,6 +104,27 @@ export function Navbar() {
               </NavLink>
             ))}
           </nav>
+          {!loading && (
+            <div className="mt-3 flex flex-col gap-2 border-t border-white/[0.06] pt-3">
+              {user ? (
+                <>
+                  <span className="px-3 text-sm text-muted-foreground">{user.name || user.email}</span>
+                  <Button size="sm" variant="outline" onClick={() => void logout()}>
+                    Sign out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button to="/login" size="sm" variant="outline" onClick={() => setOpen(false)}>
+                    Sign in
+                  </Button>
+                  <Button to="/signup" size="sm" onClick={() => setOpen(false)}>
+                    Sign up
+                  </Button>
+                </>
+              )}
+            </div>
+          )}
         </div>
       )}
     </header>
